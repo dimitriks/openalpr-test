@@ -1,8 +1,8 @@
 {
-  "name": "openalpr",
-  "displayName": "HelloCordova",
+  "name": "openalpr test",
+  "displayName": "openalpr test",
   "version": "0.0.1",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "cordova app for cordova-plugin-openalpr testing",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,28 +11,36 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cordova-android": "^6.3.0",
+    "cordova-ios": "^4.5.3",
+    "cordova-plugin-camera": "^2.4.1",
+    "cordova-plugin-device": "^1.1.6",
+    "cordova-plugin-filepath": "^1.1.0",
     "cordova-plugin-openalpr": "^1.0.0",
     "cordova-plugin-whitelist": "^1.3.2"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-openalpr": {}
+      "cordova-plugin-openalpr": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-device": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dimitriks/cordova-app-with-plugin-openalpr.git"
+    "url": "git+https://github.com/dimitriks/openalpr-test.git"
   },
   "keywords": [
     ""
   ],
   "bugs": {
-    "url": "https://github.com/dimitriks/cordova-app-with-plugin-openalpr/issues"
+    "url": "https://github.com/dimitriks/openalpr-test/issues"
   },
-  "homepage": "https://github.com/dimitriks/cordova-app-with-plugin-openalpr#readme"
+  "homepage": "https://github.com/dimitriks/openalpr-test#readme"
 }
