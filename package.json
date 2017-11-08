@@ -1,0 +1,38 @@
+{
+  "name": "openalpr",
+  "displayName": "HelloCordova",
+  "version": "0.0.1",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-android": "^6.3.0",
+    "cordova-plugin-openalpr": "^1.0.0",
+    "cordova-plugin-whitelist": "^1.3.2"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-openalpr": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimitriks/cordova-app-with-plugin-openalpr.git"
+  },
+  "keywords": [
+    ""
+  ],
+  "bugs": {
+    "url": "https://github.com/dimitriks/cordova-app-with-plugin-openalpr/issues"
+  },
+  "homepage": "https://github.com/dimitriks/cordova-app-with-plugin-openalpr#readme"
+}
