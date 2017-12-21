@@ -41,7 +41,7 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function () {
-        console.log(navigator.device.capture);
+        console.log(navigator.device);
         this.receivedEvent('deviceready');
 
         // pendingcaptureresult is fired if the capture call is successful
