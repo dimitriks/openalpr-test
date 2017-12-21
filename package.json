@@ -29,7 +29,7 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-device": {},
-      "https://github.com/apache/cordova-plugin-media-capture.git": {},
+      "https://github.com/remoorejr/cordova-plugin-media-capture-mp4video.git": {},
       "cordova-plugin-media": {},
       "cordova-plugin-dialogs": {}
     },
