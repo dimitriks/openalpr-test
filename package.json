@@ -15,7 +15,9 @@
     "cordova-plugin-camera": "^2.4.1",
     "cordova-plugin-device": "^1.1.6",
     "cordova-plugin-dialogs": "^1.3.4",
+    "cordova-plugin-file": "^4.3.3",
     "cordova-plugin-filepath": "^1.1.0",
+    "cordova-plugin-media": "^3.0.0",
     "cordova-plugin-media-capture-mp4video": "^1.0.5",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-openalpr": "^1.0.0",
@@ -31,7 +33,8 @@
       "https://github.com/remoorejr/cordova-plugin-media-capture-mp4video.git": {},
       "https://github.com/moust/cordova-plugin-videoplayer.git": {},
       "cordova-plugin-dialogs": {},
-      "cordova-plugin-nativeaudio": {}
+      "cordova-plugin-nativeaudio": {},
+      "cordova-plugin-media": {}
     },
     "platforms": [
       "android",

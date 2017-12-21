@@ -130,54 +130,14 @@ var app = {
             return;
         }
 
-        window.resolveLocalFileSystemURL(sound.file, function (e) {
-            // fe.copyTo(d, filename, function (e) {
-                console.log('success inc opy');
-                // console.dir(e);
-                sound.file = e.nativeURL;
-                sound.path = e.fullPath;
 
-
-            if (window.plugins && window.plugins.NativeAudio) {
-
-                // Preload audio resources
-                window.plugins.NativeAudio.preloadComplex('music', sound.path, 1, 1, 0, function (msg) {
-
-                    console.log('msg: ' + msg);
-                    window.plugins.NativeAudio.play('music');
-                }, function (msg) {
-                    console.log('error: ' + msg);
-                });
-            }
-                // Sounds.save(sound).then(function () {
-                //     $ionicHistory.nextViewOptions({
-                //         disableBack: true
-                //     });
-                //     $state.go("home");
-                // });
-
-            // }, function (e) {
-            //     console.log('error in coipy');
-            //     console.dir(e);
-            // });
-        }, function (e) {
-            console.log("error in inner bullcrap");
-            console.dir(e);
+        var media = new Media(sound.file, function () {
+            media.release();
+        }, function (err) {
+            console.log("media err", err);
         });
 
-
-
-
-
-
-
-        // var media = new Media(sound.file, function () {
-        //     media.release();
-        // }, function (err) {
-        //     console.log("media err", err);
-        // });
-        //
-        // media.play();
+        media.play();
     },
 
     captureError:
