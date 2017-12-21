@@ -140,13 +140,9 @@ var app = {
         media.play();
     },
 
-    captureError:
-
-        function (e) {
-            console.log('captureError ', e);
-        }
-
-    ,
+    captureError: function (e) {
+        console.log('captureError ', e);
+    },
 
 
     // var playSound = function(x) {
@@ -174,8 +170,7 @@ var app = {
         console.log('OpenFileButton Click');
 
         this.cameraGetPicture();
-    }
-    ,
+    },
 
     cameraGetPicture: function () {
         var cameraOptions = {
@@ -186,8 +181,7 @@ var app = {
         };
 
         navigator.camera.getPicture(this.cameraSuccess.bind(this), this.cameraError.bind(this), cameraOptions);
-    }
-    ,
+    },
 
     cameraSuccess: function (url) {
         console.log('photo loaded...');
@@ -200,15 +194,13 @@ var app = {
         }
 
         return false;
-    }
-    ,
+    },
 
     cameraError: function (e) {
         console.log('Error photo loading: ', e);
 
         return false;
-    }
-    ,
+    },
 
     openALPRScan: function (url) {
         var resultText = document.getElementsByClassName('result-text')[0];
@@ -231,8 +223,7 @@ var app = {
         }
 
         cordova.plugins.OpenALPR.scan(url, successScan, errorScan);
-    }
-    ,
+    },
 
     resoolveNativePathAndThenOpenALPRScan: function (url) {
         function onSuccess(result) {
