@@ -134,6 +134,9 @@ var app = {
 
             // Preload audio resources
             window.plugins.NativeAudio.preloadComplex( 'music', sound.file, 1, 1, 0, function(msg){
+
+                console.log( 'msg: ' + msg );
+                window.plugins.NativeAudio.play( 'music' );
             }, function(msg){
                 console.log( 'error: ' + msg );
             });
@@ -145,7 +148,7 @@ var app = {
 
 
             // Play
-            window.plugins.NativeAudio.play( 'music' );
+
             // window.plugins.NativeAudio.loop( 'music' );
 
 
