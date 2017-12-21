@@ -30,6 +30,7 @@
       "cordova-plugin-filepath": {},
       "cordova-plugin-device": {},
       "https://github.com/remoorejr/cordova-plugin-media-capture-mp4video.git": {},
+      "https://github.com/moust/cordova-plugin-videoplayer.git": {},
       "cordova-plugin-media": {},
       "cordova-plugin-dialogs": {}
     },

@@ -94,16 +94,16 @@ var app = {
             return;
         }
 
-        // function completeCallback() {
-        //     console.log(' VideoPlayer completeCallback');
-        // }
-        //
-        // function errorCallback(e) {
-        //     console.log(' VideoPlayer errorCallback ', e);
-        // }
-        //
-        // var options = {volume: 0.5};
-        // VideoPlayer.play(sound.file, [options], [completeCallback], [errorCallback]);
+        function completeCallback() {
+            console.log(' VideoPlayer completeCallback');
+        }
+
+        function errorCallback(e) {
+            console.log(' VideoPlayer errorCallback ', e);
+        }
+
+        var options = {volume: 0.5};
+        VideoPlayer.play(sound.file, [options], [completeCallback], [errorCallback]);
     },
 
     onClickCaptureAudioButton: function () {
