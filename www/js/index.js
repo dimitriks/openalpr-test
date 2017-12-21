@@ -43,6 +43,16 @@ var app = {
     onDeviceReady: function () {
         console.log(navigator.device.capture);
         this.receivedEvent('deviceready');
+
+        // pendingcaptureresult is fired if the capture call is successful
+        document.addEventListener('pendingcaptureresult', function(mediaFiles) {
+            console.log('pendingcaptureresult', mediaFiles);
+        });
+
+        // pendingcaptureerror is fired if the capture call is unsuccessful
+        document.addEventListener('pendingcaptureerror', function(error) {
+            console.log('pendingcaptureerror', error);
+        });
     },
 
     // Update DOM on a Received Event
@@ -59,6 +69,11 @@ var app = {
 
     onClickCaptureVideoButton: function() {
         var options = {duration: 10};
+
+        if (!navigator.device) {
+            navigator.notification.alert("navigator.device  undefined", null, "Error");
+            return;
+        }
         navigator.device.capture.captureVideo(
             this.captureVideoSuccess, this.captureError, [options]
         );
@@ -93,6 +108,11 @@ var app = {
 
     onClickCaptureAudioButton: function () {
         var options = {duration: 10};
+
+        if (!navigator.device) {
+            navigator.notification.alert("navigator.device  undefined", null, "Error");
+            return;
+        }
         navigator.device.capture.captureAudio(
             this.captureSuccess, this.captureError, [options]
         );

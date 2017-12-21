@@ -19,7 +19,7 @@
     "cordova-plugin-file": "^5.0.0",
     "cordova-plugin-filepath": "^1.1.0",
     "cordova-plugin-media": "^4.0.0",
-    "cordova-plugin-media-capture": "^2.0.0",
+    "cordova-plugin-media-capture": "~3.0.0",
     "cordova-plugin-openalpr": "^1.0.0",
     "cordova-plugin-video-player": "^1.0.1",
     "cordova-plugin-whitelist": "^1.3.2"
