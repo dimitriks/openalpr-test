@@ -83,14 +83,13 @@ var app = {
         console.log('captureVideoSuccess');
         console.dir(e);
 
-        var sound = {};
-        sound.file = e[0].localURL;
-        sound.filePath = e[0].fullPath;
+        var video = {};
+        video.file = e[0].localURL;
+        video.filePath = e[0].fullPath;
 
-        // this.playSound(sound);
 
-        if (!sound.file) {
-            navigator.notification.alert("Record a sound first.", null, "Error");
+        if (!video.file) {
+            navigator.notification.alert("Record a video first.", null, "Error");
             return;
         }
 
@@ -103,7 +102,7 @@ var app = {
         }
 
         var options = {volume: 0.5};
-        VideoPlayer.play(sound.file, [options], [completeCallback], [errorCallback]);
+        VideoPlayer.play(video.file, [options], [completeCallback], [errorCallback]);
     },
 
     onClickCaptureAudioButton: function () {
@@ -125,8 +124,6 @@ var app = {
         var sound = {};
         sound.file = e[0].localURL;
         sound.filePath = e[0].fullPath;
-
-        // this.playSound(sound);
 
         if (!sound.file) {
             navigator.notification.alert("Record a sound first.", null, "Error");
