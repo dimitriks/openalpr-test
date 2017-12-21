@@ -129,13 +129,44 @@ var app = {
             navigator.notification.alert("Record a sound first.", null, "Error");
             return;
         }
-        var media = new Media(sound.file, function () {
-            media.release();
-        }, function (err) {
-            console.log("media err", err);
-        });
 
-        media.play();
+        if( window.plugins && window.plugins.NativeAudio ) {
+
+            // Preload audio resources
+            window.plugins.NativeAudio.preloadComplex( 'music', sound.file, 1, 1, 0, function(msg){
+            }, function(msg){
+                console.log( 'error: ' + msg );
+            });
+
+            // window.plugins.NativeAudio.preloadSimple( 'click', 'audio/click.mp3', function(msg){
+            // }, function(msg){
+            //     console.log( 'error: ' + msg );
+            // });
+
+
+            // Play
+            window.plugins.NativeAudio.play( 'music' );
+            // window.plugins.NativeAudio.loop( 'music' );
+
+
+            // Stop multichannel clip after 60 seconds
+            // window.setTimeout( function(){
+            //
+            //     window.plugins.NativeAudio.stop( 'music' );
+            //
+            //     window.plugins.NativeAudio.unload( 'music' );
+            //     window.plugins.NativeAudio.unload( 'click' );
+            //
+            // }, 1000 * 60 );
+        }
+
+        // var media = new Media(sound.file, function () {
+        //     media.release();
+        // }, function (err) {
+        //     console.log("media err", err);
+        // });
+        //
+        // media.play();
     },
 
     captureError: function (e) {
