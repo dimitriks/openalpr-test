@@ -74,7 +74,9 @@ body {
     width: 17em;
 }
 
-.open-file-button {
+.open-file-button,
+.capture-audio,
+.capture-video {
     width: 10em;
     height: 4em;
 }

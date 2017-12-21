@@ -18,24 +18,34 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 
         var openFileButton = document.getElementsByClassName("open-file-button");
+        var captureAudioButton = document.getElementsByClassName("capture-audio");
+        var captureVideoButton = document.getElementsByClassName("capture-video");
 
-        openFileButton[0].addEventListener("click", this.onClickOpenFileButton.bind(this), false);
+        if (openFileButton.length) {
+            openFileButton[0].addEventListener("click", this.onClickOpenFileButton.bind(this), false);
+        }
+        if (captureAudioButton.length) {
+            captureAudioButton[0].addEventListener("click", this.onClickCaptureAudioButton.bind(this), false);
+        }
+        if (captureVideoButton) {
+            captureVideoButton[0].addEventListener("click", this.onClickCaptureVideoButton.bind(this), false);
+        }
     },
 
     // deviceready Event Handler
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
+    onDeviceReady: function () {
         this.receivedEvent('deviceready');
     },
 
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         // var parentElement = document.getElementById(id);
         // var listeningElement = parentElement.querySelector('.listening');
         // var receivedElement = parentElement.querySelector('.received');
@@ -46,7 +56,119 @@ var app = {
         console.log('Received Event: ' + id);
     },
 
-    onClickOpenFileButton: function() {
+    onClickCaptureVideoButton: function() {
+        var options = {duration: 10};
+        navigator.device.capture.captureVideo(
+            this.captureVideoSuccess, this.captureError, [options]
+        );
+    },
+
+    captureVideoSuccess: function (e) {
+        console.log('captureVideoSuccess');
+        console.dir(e);
+
+        var sound = {};
+        sound.file = e[0].localURL;
+        sound.filePath = e[0].fullPath;
+
+        // this.playSound(sound);
+
+        if (!sound.file) {
+            navigator.notification.alert("Record a sound first.", null, "Error");
+            return;
+        }
+
+        function completeCallback() {
+            console.log(' VideoPlayer completeCallback');
+        }
+
+        function errorCallback(e) {
+            console.log(' VideoPlayer errorCallback ', e);
+        }
+
+        var options = {volume: 0.5};
+        VideoPlayer.play(sound.file, [options], [completeCallback], [errorCallback]);
+    },
+
+    onClickCaptureAudioButton: function () {
+        var options = {duration: 10};
+        navigator.device.capture.captureAudio(
+            this.captureSuccess, this.captureError, [options]
+        );
+    },
+
+    captureSuccess: function (e) {
+        console.log('captureSuccess');
+        console.dir(e);
+
+        var sound = {};
+        sound.file = e[0].localURL;
+        sound.filePath = e[0].fullPath;
+
+        // this.playSound(sound);
+
+        if (!sound.file) {
+            navigator.notification.alert("Record a sound first.", null, "Error");
+            return;
+        }
+        var media = new Media(sound.file, function () {
+            media.release();
+        }, function (err) {
+            console.log("media err", err);
+        });
+
+        media.play();
+    },
+
+    captureError: function (e) {
+        console.log('captureError ', e);
+    },
+
+    // window.resolveLocalFileSystemURL(loc, function(d) {
+    // window.resolveLocalFileSystemURL($scope.sound.file, function(fe) {
+    //     fe.copyTo(d, filename, function(e) {
+    //         console.log('success inc opy');
+    //         console.dir(e);
+    //         $scope.sound.file = e.nativeURL;
+    //         $scope.sound.path = e.fullPath;
+    //
+    //         Sounds.save($scope.sound).then(function() {
+    //             $ionicHistory.nextViewOptions({
+    //                 disableBack: true
+    //             });
+    //             $state.go("home");
+    //         });
+    //
+    //     }, function(e) {
+    //         console.log('error in coipy');console.dir(e);
+    //     });
+    // }, function(e) {
+    //     console.log("error in inner bullcrap");
+    //     console.dir(e);
+    // });
+
+    // var playSound = function(x) {
+    //     getSounds().then(function(sounds) {
+    //         var sound = sounds[x];
+    //
+    //         /*
+    //         Ok, so on Android, we just work.
+    //         On iOS, we need to rewrite to ../Library/NoCloud/FILE
+    //         */
+    //         var mediaUrl = sound.file;
+    //         if(device.platform.indexOf("iOS") >= 0) {
+    //             mediaUrl = "../Library/NoCloud/" + mediaUrl.split("/").pop();
+    //         }
+    //         var media = new Media(mediaUrl, function(e) {
+    //             media.release();
+    //         }, function(err) {
+    //             console.log("media err", err);
+    //         });
+    //         media.play();
+    //     });
+    // }
+
+    onClickOpenFileButton: function () {
         console.log('OpenFileButton Click');
 
         this.cameraGetPicture();
