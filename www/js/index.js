@@ -130,34 +130,18 @@ var app = {
             return;
         }
 
-        // window.resolveLocalFileSystemURL(sound.file, function (fe) {
-        //     fe.copyTo(d, filename, function (e) {
-        //         console.log('success inc opy');
-        //         console.dir(e);
-        //         $scope.sound.file = e.nativeURL;
-        //         $scope.sound.path = e.fullPath;
-        //
-        //         Sounds.save($scope.sound).then(function () {
-        //             $ionicHistory.nextViewOptions({
-        //                 disableBack: true
-        //             });
-        //             $state.go("home");
-        //         });
-        //
-        //     }, function (e) {
-        //         console.log('error in coipy');
-        //         console.dir(e);
-        //     });
-        // }, function (e) {
-        //     console.log("error in inner bullcrap");
-        //     console.dir(e);
-        // });
+        window.resolveLocalFileSystemURL(sound.file, function (e) {
+            // fe.copyTo(d, filename, function (e) {
+                console.log('success inc opy');
+                // console.dir(e);
+                sound.file = e.nativeURL;
+                sound.path = e.fullPath;
 
-        function onSuccess(result) {
+
             if (window.plugins && window.plugins.NativeAudio) {
 
                 // Preload audio resources
-                window.plugins.NativeAudio.preloadComplex('music', result, 1, 1, 0, function (msg) {
+                window.plugins.NativeAudio.preloadComplex('music', sound.file, 1, 1, 0, function (msg) {
 
                     console.log('msg: ' + msg);
                     window.plugins.NativeAudio.play('music');
@@ -165,13 +149,25 @@ var app = {
                     console.log('error: ' + msg);
                 });
             }
-        }
+                // Sounds.save(sound).then(function () {
+                //     $ionicHistory.nextViewOptions({
+                //         disableBack: true
+                //     });
+                //     $state.go("home");
+                // });
 
-        function onError(error) {
-            logger.debug("resolveNativePath error", error);
-        }
+            // }, function (e) {
+            //     console.log('error in coipy');
+            //     console.dir(e);
+            // });
+        }, function (e) {
+            console.log("error in inner bullcrap");
+            console.dir(e);
+        });
 
-        window.FilePath.resolveNativePath(sound.file, onSuccess.bind(this), onError.bind(this));
+
+
+
 
 
 
@@ -284,7 +280,7 @@ var app = {
         }
 
         function onError(error) {
-            logger.debug("resolveNativePath error", error);
+            console.log("resolveNativePath error", error);
         }
 
         window.FilePath.resolveNativePath(url, onSuccess.bind(this), onError.bind(this));
