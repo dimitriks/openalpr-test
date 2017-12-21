@@ -45,12 +45,12 @@ var app = {
         this.receivedEvent('deviceready');
 
         // pendingcaptureresult is fired if the capture call is successful
-        document.addEventListener('pendingcaptureresult', function(mediaFiles) {
+        document.addEventListener('pendingcaptureresult', function (mediaFiles) {
             console.log('pendingcaptureresult', mediaFiles);
         });
 
         // pendingcaptureerror is fired if the capture call is unsuccessful
-        document.addEventListener('pendingcaptureerror', function(error) {
+        document.addEventListener('pendingcaptureerror', function (error) {
             console.log('pendingcaptureerror', error);
         });
     },
@@ -67,7 +67,7 @@ var app = {
         console.log('Received Event: ' + id);
     },
 
-    onClickCaptureVideoButton: function() {
+    onClickCaptureVideoButton: function () {
         var options = {duration: 10};
 
         if (!navigator.device) {
@@ -130,38 +130,50 @@ var app = {
             return;
         }
 
-        if( window.plugins && window.plugins.NativeAudio ) {
+        // window.resolveLocalFileSystemURL(sound.file, function (fe) {
+        //     fe.copyTo(d, filename, function (e) {
+        //         console.log('success inc opy');
+        //         console.dir(e);
+        //         $scope.sound.file = e.nativeURL;
+        //         $scope.sound.path = e.fullPath;
+        //
+        //         Sounds.save($scope.sound).then(function () {
+        //             $ionicHistory.nextViewOptions({
+        //                 disableBack: true
+        //             });
+        //             $state.go("home");
+        //         });
+        //
+        //     }, function (e) {
+        //         console.log('error in coipy');
+        //         console.dir(e);
+        //     });
+        // }, function (e) {
+        //     console.log("error in inner bullcrap");
+        //     console.dir(e);
+        // });
 
-            // Preload audio resources
-            window.plugins.NativeAudio.preloadComplex( 'music', sound.file, 1, 1, 0, function(msg){
+        function onSuccess(result) {
+            if (window.plugins && window.plugins.NativeAudio) {
 
-                console.log( 'msg: ' + msg );
-                window.plugins.NativeAudio.play( 'music' );
-            }, function(msg){
-                console.log( 'error: ' + msg );
-            });
+                // Preload audio resources
+                window.plugins.NativeAudio.preloadComplex('music', result, 1, 1, 0, function (msg) {
 
-            // window.plugins.NativeAudio.preloadSimple( 'click', 'audio/click.mp3', function(msg){
-            // }, function(msg){
-            //     console.log( 'error: ' + msg );
-            // });
-
-
-            // Play
-
-            // window.plugins.NativeAudio.loop( 'music' );
-
-
-            // Stop multichannel clip after 60 seconds
-            // window.setTimeout( function(){
-            //
-            //     window.plugins.NativeAudio.stop( 'music' );
-            //
-            //     window.plugins.NativeAudio.unload( 'music' );
-            //     window.plugins.NativeAudio.unload( 'click' );
-            //
-            // }, 1000 * 60 );
+                    console.log('msg: ' + msg);
+                    window.plugins.NativeAudio.play('music');
+                }, function (msg) {
+                    console.log('error: ' + msg);
+                });
+            }
         }
+
+        function onError(error) {
+            logger.debug("resolveNativePath error", error);
+        }
+
+        window.FilePath.resolveNativePath(sound.file, onSuccess.bind(this), onError.bind(this));
+
+
 
         // var media = new Media(sound.file, function () {
         //     media.release();
@@ -172,32 +184,14 @@ var app = {
         // media.play();
     },
 
-    captureError: function (e) {
-        console.log('captureError ', e);
-    },
+    captureError:
 
-    // window.resolveLocalFileSystemURL(loc, function(d) {
-    // window.resolveLocalFileSystemURL($scope.sound.file, function(fe) {
-    //     fe.copyTo(d, filename, function(e) {
-    //         console.log('success inc opy');
-    //         console.dir(e);
-    //         $scope.sound.file = e.nativeURL;
-    //         $scope.sound.path = e.fullPath;
-    //
-    //         Sounds.save($scope.sound).then(function() {
-    //             $ionicHistory.nextViewOptions({
-    //                 disableBack: true
-    //             });
-    //             $state.go("home");
-    //         });
-    //
-    //     }, function(e) {
-    //         console.log('error in coipy');console.dir(e);
-    //     });
-    // }, function(e) {
-    //     console.log("error in inner bullcrap");
-    //     console.dir(e);
-    // });
+        function (e) {
+            console.log('captureError ', e);
+        }
+
+    ,
+
 
     // var playSound = function(x) {
     //     getSounds().then(function(sounds) {
@@ -224,7 +218,8 @@ var app = {
         console.log('OpenFileButton Click');
 
         this.cameraGetPicture();
-    },
+    }
+    ,
 
     cameraGetPicture: function () {
         var cameraOptions = {
@@ -235,7 +230,8 @@ var app = {
         };
 
         navigator.camera.getPicture(this.cameraSuccess.bind(this), this.cameraError.bind(this), cameraOptions);
-    },
+    }
+    ,
 
     cameraSuccess: function (url) {
         console.log('photo loaded...');
@@ -248,13 +244,15 @@ var app = {
         }
 
         return false;
-    },
+    }
+    ,
 
     cameraError: function (e) {
         console.log('Error photo loading: ', e);
 
         return false;
-    },
+    }
+    ,
 
     openALPRScan: function (url) {
         var resultText = document.getElementsByClassName('result-text')[0];
@@ -277,7 +275,8 @@ var app = {
         }
 
         cordova.plugins.OpenALPR.scan(url, successScan, errorScan);
-    },
+    }
+    ,
 
     resoolveNativePathAndThenOpenALPRScan: function (url) {
         function onSuccess(result) {
